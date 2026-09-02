@@ -1,45 +1,60 @@
-import { useCallback, useEffect, useState } from "react";
-import { Link, NavLink } from "react-router-dom";
-import { CircleUser, Menu, X } from "lucide-react";
+import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { Menu, X } from "lucide-react";
 import PropTypes from "prop-types";
 import styles from "./Navbar.module.css";
 
-const links = [
-  { to: "/", label: "Home" },
-  { to: "/recipes", label: "Recipes" },
-  { to: "/meal-planner", label: "Meal Planner" },
-  { to: "/favorites", label: "Favorites" },
-];
+function NavLinks({ onNavigate, className }) {
+  const location = useLocation();
+
+  return (
+    <nav className={className}>
+      <Link
+        to="/"
+        className={`${styles.link} ${location.pathname === "/" ? styles.active : ""}`}
+        onClick={onNavigate}
+      >
+        Home
+      </Link>
+      <Link
+        to="/recipes"
+        className={`${styles.link} ${location.pathname.includes("/recipes") ? styles.active : ""}`}
+        onClick={onNavigate}
+      >
+        Recipes
+      </Link>
+      <Link
+        to="/meal-planner"
+        className={`${styles.link} ${location.pathname === "/meal-planner" ? styles.active : ""}`}
+        onClick={onNavigate}
+      >
+        Meal Planner
+      </Link>
+      <Link
+        to="/favorites"
+        className={`${styles.link} ${location.pathname === "/favorites" ? styles.active : ""}`}
+        onClick={onNavigate}
+      >
+        Favorites
+      </Link>
+    </nav>
+  );
+}
+
+NavLinks.propTypes = {
+  onNavigate: PropTypes.func,
+  className: PropTypes.string,
+};
 
 export default function Navbar({ setIsOpen: setIsOpenProp }) {
   const [isOpen, setIsOpenState] = useState(false);
 
-  const setIsOpen = useCallback(
-    (value) => {
-      setIsOpenState(value);
-      setIsOpenProp?.(value);
-    },
-    [setIsOpenProp],
-  );
-
-  useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "";
-
-    const onKeyDown = (event) => {
-      if (event.key === "Escape") setIsOpen(false);
-    };
-
-    window.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", onKeyDown);
-    };
-  }, [isOpen, setIsOpen]);
+  const setIsOpen = (value) => {
+    setIsOpenState(value);
+    setIsOpenProp?.(value);
+  };
 
   const closeMenu = () => setIsOpen(false);
-
-  const linkClassName = ({ isActive }) =>
-    isActive ? `${styles.link} ${styles.active}` : styles.link;
 
   return (
     <>
@@ -52,9 +67,6 @@ export default function Navbar({ setIsOpen: setIsOpenProp }) {
           <div
             className={styles.panel}
             onClick={(event) => event.stopPropagation()}
-            role="dialog"
-            aria-modal="true"
-            aria-label="Navigation menu"
           >
             <button
               type="button"
@@ -64,25 +76,13 @@ export default function Navbar({ setIsOpen: setIsOpenProp }) {
             >
               <X size={28} />
             </button>
-            <nav className={styles.mobileNav} aria-label="Mobile">
-              {links.map((link) => (
-                <NavLink
-                  key={link.to}
-                  to={link.to}
-                  className={linkClassName}
-                  onClick={closeMenu}
-                  end={link.to === "/"}
-                >
-                  {link.label}
-                </NavLink>
-              ))}
-            </nav>
+            <NavLinks className={styles.mobileNav} onNavigate={closeMenu} />
           </div>
         </div>
       )}
 
       <header className={styles.header}>
-        <nav className={styles.nav} aria-label="Main">
+        <div className={styles.nav}>
           <button
             type="button"
             className={styles.menuButton}
@@ -97,21 +97,8 @@ export default function Navbar({ setIsOpen: setIsOpenProp }) {
             Platr
           </Link>
 
-          <div className={styles.desktopLinks}>
-            {links.map((link) => (
-              <NavLink
-                key={link.to}
-                to={link.to}
-                className={linkClassName}
-                end={link.to === "/"}
-              >
-                {link.label}
-              </NavLink>
-            ))}
-          </div>
-
-          <CircleUser className={styles.avatar} aria-hidden="true" />
-        </nav>
+          <NavLinks className={styles.desktopLinks} onNavigate={closeMenu} />
+        </div>
       </header>
     </>
   );
