@@ -1,12 +1,18 @@
+/**
+ * Navbar.jsx
+ * Responsive Navigation Header with mobile drawer toggle and live favorites counter badge.
+ */
+
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import Logo from "../common/Logo";
+import { useFavorites } from "../../hooks/useFavorites";
 import styles from "./Navbar.module.css";
 
 const links = [
   { to: "/", label: "Home", match: (path) => path === "/" },
-  { to: "/recipes", label: "Recipes", match: (path) => path.includes("/recipes") },
+  { to: "/recipes", label: "Recipes", match: (path) => path.startsWith("/recipes") },
   { to: "/meal-planner", label: "Meal Planner", match: (path) => path === "/meal-planner" },
   { to: "/favorites", label: "Favorites", match: (path) => path === "/favorites" },
 ];
@@ -14,6 +20,7 @@ const links = [
 export default function Navbar() {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const { favoritesCount } = useFavorites();
 
   return (
     <>
@@ -37,6 +44,20 @@ export default function Navbar() {
                   onClick={() => setIsOpen(false)}
                 >
                   {link.label}
+                  {link.to === "/favorites" && favoritesCount > 0 && (
+                    <span
+                      style={{
+                        marginLeft: 8,
+                        background: "var(--primary)",
+                        color: "#fff",
+                        borderRadius: 999,
+                        padding: "2px 8px",
+                        fontSize: 12,
+                      }}
+                    >
+                      {favoritesCount}
+                    </span>
+                  )}
                 </Link>
               ))}
             </nav>
@@ -66,6 +87,21 @@ export default function Navbar() {
                 className={link.match(location.pathname) ? styles.active : styles.link}
               >
                 {link.label}
+                {link.to === "/favorites" && favoritesCount > 0 && (
+                  <span
+                    style={{
+                      marginLeft: 6,
+                      background: "var(--primary)",
+                      color: "#fff",
+                      borderRadius: 999,
+                      padding: "2px 7px",
+                      fontSize: 11,
+                      fontWeight: 700,
+                    }}
+                  >
+                    {favoritesCount}
+                  </span>
+                )}
               </Link>
             ))}
           </nav>

@@ -1,3 +1,8 @@
+/**
+ * Footer.jsx
+ * Global site footer with branding, support links, social icons, and copyright.
+ */
+
 import { Mail, Globe, Share2 } from "lucide-react";
 import styles from "./common.module.css";
 
@@ -19,13 +24,13 @@ export default function Footer() {
           <div>
             <span className={styles.footerTitle}>Social</span>
             <div className={styles.socials}>
-              <a href="#share" aria-label="Share">
+              <a href="#share" aria-label="Share Platr">
                 <Share2 size={20} />
               </a>
-              <a href="#web" aria-label="Website">
+              <a href="#web" aria-label="Platr Website">
                 <Globe size={20} />
               </a>
-              <a href="#mail" aria-label="Email">
+              <a href="#mail" aria-label="Contact support via email">
                 <Mail size={20} />
               </a>
             </div>

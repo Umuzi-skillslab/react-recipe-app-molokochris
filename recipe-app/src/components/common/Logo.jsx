@@ -1,3 +1,8 @@
+/**
+ * Logo.jsx
+ * Brand Logo component linking back to the Home page.
+ */
+
 import { Link } from "react-router-dom";
 import styles from "./common.module.css";
 
