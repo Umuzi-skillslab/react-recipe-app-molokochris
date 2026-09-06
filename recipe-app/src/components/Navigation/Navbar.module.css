@@ -1,138 +1,113 @@
 .header {
   position: sticky;
   top: 0;
-  z-index: 10;
-  background: #fff;
+  z-index: 20;
+  background: rgba(247, 250, 245, 0.92);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
+}
+
+.bar {
+  width: min(1200px, calc(100% - 32px));
+  margin: 0 auto;
+  height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.menuBtn,
+.iconBtn {
+  display: none;
+  border: none;
+  background: none;
+  color: var(--primary);
+  padding: 0;
+  cursor: pointer;
 }
 
 .nav {
-  display: grid;
-  grid-template-columns: 2rem 1fr 2rem;
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+  gap: 28px;
+}
+
+.link,
+.active {
+  display: flex;
   align-items: center;
-  padding: 0.6rem 1rem;
-}
-
-.menuButton {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  border: none;
-  background: none;
-  color: #276b35;
-  cursor: pointer;
-}
-
-.menuIcon {
-  width: 28px;
-  height: 28px;
-}
-
-.logo {
-  justify-self: center;
-  color: #276b35;
   text-decoration: none;
-  font-size: 1.6rem;
-  line-height: 1;
+  font-size: 14px;
+  font-weight: 500;
+  border-bottom: 3px solid transparent;
 }
 
 .link {
-  color: #276b35;
-  text-decoration: none;
-  font-weight: 600;
+  color: var(--muted);
 }
 
-.link:hover,
-.link:focus-visible,
+.link:hover {
+  color: var(--text);
+}
+
 .active {
-  text-decoration: underline;
+  color: var(--primary);
+  border-bottom-color: var(--leaf);
 }
 
-.desktopLinks {
+.overlay {
   display: none;
 }
 
-.mobileNav {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-  margin-top: 2rem;
-}
-
-.mobileNav .link {
-  font-size: 1.1rem;
-}
-
-.sidemenu {
-  display: flex;
-  position: fixed;
-  inset: 0;
-  z-index: 20;
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(1, 1, 1, 0.4);
-}
-
-.panel {
-  display: flex;
-  flex-direction: column;
-  width: min(80%, 280px);
-  height: 100%;
-  padding: 1rem;
-  background: #fff;
-}
-
-.closeButton {
-  align-self: flex-end;
-  display: inline-flex;
-  padding: 0;
-  border: none;
-  background: none;
-  color: #276b35;
-  cursor: pointer;
-}
-
-/* ==========================================
-   2. TABLET
-   Target: Screens from 481px to 1024px wide
-   ========================================== */
-
-@media (width >= 481px) {
-  .nav {
-    display: flex;
-    justify-content: space-between;
-    gap: 1.5rem;
+@media (max-width: 768px) {
+  .menuBtn,
+  .iconBtn {
+    display: inline-flex;
   }
 
-  .menuButton,
-  .sidemenu {
+  .nav {
     display: none;
   }
 
-  .logo {
-    justify-self: auto;
-    font-size: 1.8rem;
+  .overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 30;
+    background: rgba(45, 49, 46, 0.4);
   }
 
-  .desktopLinks {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
+  .drawer {
+    width: min(80%, 280px);
+    height: 100%;
+    background: var(--card);
+    padding: 16px;
+  }
+
+  .iconBtn {
     margin-left: auto;
   }
-}
 
-/* ==========================================
-   3. Desktop
-   Target: Screens from 1024px wide and above
-   ========================================== */
-
-@media (width >= 1024px) {
-  .nav {
-    padding: 0.8rem 2rem;
+  .mobileNav {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 32px;
   }
 
-  .desktopLinks {
-    gap: 2rem;
+  .mobileLink,
+  .activeMobile {
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .mobileLink {
+    color: var(--muted);
+  }
+
+  .activeMobile {
+    color: var(--primary);
   }
 }

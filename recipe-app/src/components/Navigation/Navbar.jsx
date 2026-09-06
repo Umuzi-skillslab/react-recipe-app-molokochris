@@ -1,109 +1,76 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import PropTypes from "prop-types";
+import Logo from "../common/Logo";
 import styles from "./Navbar.module.css";
 
-function NavLinks({ onNavigate, className }) {
+const links = [
+  { to: "/", label: "Home", match: (path) => path === "/" },
+  { to: "/recipes", label: "Recipes", match: (path) => path.includes("/recipes") },
+  { to: "/meal-planner", label: "Meal Planner", match: (path) => path === "/meal-planner" },
+  { to: "/favorites", label: "Favorites", match: (path) => path === "/favorites" },
+];
+
+export default function Navbar() {
   const location = useLocation();
-
-  return (
-    <nav className={className}>
-      <Link
-        to="/"
-        className={`${styles.link} ${location.pathname === "/" ? styles.active : ""}`}
-        onClick={onNavigate}
-      >
-        Home
-      </Link>
-      <Link
-        to="/recipes"
-        className={`${styles.link} ${location.pathname.includes("/recipes") ? styles.active : ""}`}
-        onClick={onNavigate}
-      >
-        Recipes
-      </Link>
-      <Link
-        to="/meal-planner"
-        className={`${styles.link} ${location.pathname === "/meal-planner" ? styles.active : ""}`}
-        onClick={onNavigate}
-      >
-        Meal Planner
-      </Link>
-      <Link
-        to="/favorites"
-        className={`${styles.link} ${location.pathname === "/favorites" ? styles.active : ""}`}
-        onClick={onNavigate}
-      >
-        Favorites
-      </Link>
-    </nav>
-  );
-}
-
-NavLinks.propTypes = {
-  onNavigate: PropTypes.func,
-  className: PropTypes.string,
-};
-
-export default function Navbar({ setIsOpen: setIsOpenProp }) {
-  const [isOpen, setIsOpenState] = useState(false);
-
-  const setIsOpen = (value) => {
-    setIsOpenState(value);
-    setIsOpenProp?.(value);
-  };
-
-  const closeMenu = () => setIsOpen(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <>
       {isOpen && (
-        <div
-          className={styles.sidemenu}
-          onClick={closeMenu}
-          role="presentation"
-        >
-          <div
-            className={styles.panel}
-            onClick={(event) => event.stopPropagation()}
-          >
+        <div className={styles.overlay} onClick={() => setIsOpen(false)}>
+          <div className={styles.drawer} onClick={(event) => event.stopPropagation()}>
             <button
               type="button"
-              className={styles.closeButton}
-              onClick={closeMenu}
+              className={styles.iconBtn}
               aria-label="Close menu"
+              onClick={() => setIsOpen(false)}
             >
-              <X size={28} />
+              <X size={26} />
             </button>
-            <NavLinks className={styles.mobileNav} onNavigate={closeMenu} />
+            <nav className={styles.mobileNav}>
+              {links.map((link) => (
+                <Link
+                  key={link.to}
+                  to={link.to}
+                  className={link.match(location.pathname) ? styles.activeMobile : styles.mobileLink}
+                  onClick={() => setIsOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
           </div>
         </div>
       )}
 
       <header className={styles.header}>
-        <div className={styles.nav}>
+        <div className={styles.bar}>
           <button
             type="button"
-            className={styles.menuButton}
-            onClick={() => setIsOpen(true)}
+            className={styles.menuBtn}
             aria-label="Open menu"
             aria-expanded={isOpen}
+            onClick={() => setIsOpen(true)}
           >
-            <Menu className={styles.menuIcon} />
+            <Menu size={26} />
           </button>
 
-          <Link to="/" className={`oi-regular ${styles.logo}`} id="logo">
-            Platr
-          </Link>
+          <Logo />
 
-          <NavLinks className={styles.desktopLinks} onNavigate={closeMenu} />
+          <nav className={styles.nav}>
+            {links.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className={link.match(location.pathname) ? styles.active : styles.link}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
         </div>
       </header>
     </>
   );
 }
-
-Navbar.propTypes = {
-  setIsOpen: PropTypes.func,
-};

@@ -1,0 +1,10 @@
+import { Link } from "react-router-dom";
+import styles from "./common.module.css";
+
+export default function Logo() {
+  return (
+    <Link to="/" className={styles.logo} aria-label="Platr home">
+      <span className={styles.wordmark}>Platr</span>
+    </Link>
+  );
+}
