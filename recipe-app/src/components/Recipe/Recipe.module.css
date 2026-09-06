@@ -7,10 +7,13 @@
   color: inherit;
   display: flex;
   flex-direction: column;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
 }
 
 .card:hover {
   box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
 }
 
 .imageWrap {
@@ -24,6 +27,11 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .imageWrap img {
+  transform: scale(1.03);
 }
 
 .heart {
@@ -34,17 +42,29 @@
   height: 36px;
   border: none;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.9);
-  color: var(--text);
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--muted);
   cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, color 0.2s ease, background 0.2s ease;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.heart:hover {
+  transform: scale(1.1);
+  background: #ffffff;
+  color: var(--danger);
 }
 
 .filled {
-  color: var(--primary);
+  color: var(--danger) !important;
 }
 
 .body {
-  padding: 16px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -58,13 +78,13 @@
 }
 
 .tag {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
   padding: 4px 8px;
   border-radius: 999px;
-  background: rgba(143, 214, 148, 0.2);
+  background: rgba(143, 214, 148, 0.25);
   color: var(--leaf-dark);
 }
 
@@ -79,7 +99,7 @@
   display: flex;
   gap: 16px;
   color: var(--muted);
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .meta span {
@@ -90,12 +110,40 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 24px;
 }
 
+/* Empty State */
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 64px 24px;
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 1px dashed var(--line);
+  grid-column: 1 / -1;
+  gap: 12px;
+}
+
+.emptyStateTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.emptyStateText {
+  color: var(--muted);
+  font-size: 14px;
+  max-width: 400px;
+}
+
+/* Recipe Detail Layout */
 .detailHero {
-  height: 280px;
+  height: 320px;
   background-size: cover;
   background-position: center;
   position: relative;
@@ -105,96 +153,250 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, var(--bg), transparent);
+  background: linear-gradient(to top, var(--bg) 0%, rgba(0, 0, 0, 0.3) 100%);
 }
 
 .detailBar {
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   top: 24px;
   left: 24px;
   right: 24px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .back {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  background: rgba(255, 255, 255, 0.9);
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.95);
   border-radius: 999px;
-  padding: 8px 14px;
+  padding: 8px 16px;
   text-decoration: none;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 600;
+  color: var(--text);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.back:hover {
+  background: #ffffff;
+  transform: translateX(-2px);
 }
 
 .panel {
   width: min(900px, calc(100% - 32px));
-  margin: -80px auto 48px;
+  margin: -80px auto 40px;
   position: relative;
+  z-index: 3;
   background: var(--card);
   border-radius: var(--radius);
   padding: 32px;
   box-shadow: var(--shadow-hover);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.description {
+  color: var(--muted);
+  font-size: 16px;
+  margin: 12px 0 16px;
+  line-height: 1.6;
 }
 
 .actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 12px;
   margin-top: 24px;
-}
-
-.primaryBtn,
-.ghostBtn {
-  border-radius: 8px;
-  padding: 12px 20px;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-.primaryBtn {
-  background: var(--cta-soft);
-  color: #2e1500;
-  border: none;
-  flex: 1;
-}
-
-.ghostBtn {
-  background: transparent;
-  border: 2px solid var(--leaf);
 }
 
 .columns {
   width: min(900px, calc(100% - 32px));
   margin: 0 auto 48px;
   display: grid;
-  grid-template-columns: 280px 1fr;
+  grid-template-columns: 320px 1fr;
   gap: 32px;
 }
 
 .ingredients {
-  background: var(--bg-soft);
+  background: var(--card);
   border-radius: var(--radius);
   padding: 24px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow);
+  height: fit-content;
 }
 
-.ingredients ul {
-  padding-left: 18px;
-  color: var(--muted);
+.ingredients h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.ingredientList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ingredientItem {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--bg-soft);
+  color: var(--text);
+}
+
+.ingredientAmount {
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.instructionsSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.instructionsSection h2 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 4px;
 }
 
 .step {
   background: var(--card);
   border-radius: 12px;
-  padding: 16px;
+  padding: 18px;
   box-shadow: var(--shadow);
-  margin-bottom: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.stepHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 6px;
+  font-size: 15px;
+}
+
+.stepNumber {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--leaf);
+  color: var(--leaf-dark);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.stepText {
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.mediaSection {
+  width: min(900px, calc(100% - 32px));
+  margin: 0 auto 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Add to Planner Modal Styles */
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 16px;
+}
+
+.modal {
+  background: var(--card);
+  border-radius: var(--radius);
+  width: min(440px, 100%);
+  padding: 24px;
+  box-shadow: var(--shadow-hover);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: popIn 0.2s ease-out;
+}
+
+@keyframes popIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modalHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modalHead h3 {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.modalFormGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.modalFormGroup label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.modalSelect {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+  font-size: 14px;
+  background: #ffffff;
+}
+
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 8px;
 }
 
 @media (max-width: 768px) {
   .columns {
     grid-template-columns: 1fr;
+  }
+  .panel {
+    margin-top: -40px;
+    padding: 20px;
   }
 }
