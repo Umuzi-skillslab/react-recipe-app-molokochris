@@ -1,29 +1,25 @@
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-import "./index.css";
-import "./App.css";
 import Navbar from "./components/Navigation/Navbar";
-import Footer from "./components/Footer/Footer";
-import { useState } from "react";
+import Footer from "./components/common/Footer";
+import RecipeDetail from "./components/Recipe/RecipeDetail";
+import Home from "./pages/Home";
+import RecipesPage from "./pages/RecipesPage";
+import MealPlannerPage from "./pages/MealPlannerPage";
+import FavoritesPage from "./pages/FavoritesPage";
+import NotFound from "./pages/NotFound";
+import "./index.css";
 
 function App() {
-  const [sideMenu, setSideMenu] = useState(false);
-
-  console.log(sideMenu);
   return (
     <>
-      <Navbar setIsOpen={setSideMenu} />
+      <Navbar />
       <Routes>
-        <Route index path="/" element={<Home />} />
-        {/* <Route path="/recipes" element={<RecipesPage />} />
-
+        <Route path="/" element={<Home />} />
+        <Route path="/recipes" element={<RecipesPage />} />
         <Route path="/recipes/:id" element={<RecipeDetail />} />
-
         <Route path="/meal-planner" element={<MealPlannerPage />} />
-
         <Route path="/favorites" element={<FavoritesPage />} />
-
-        <Route path="*" element={<NotFound />} />*/}
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />
     </>
