@@ -1,72 +1,161 @@
-import RecipeCard from "../components/Recipe/RecipeCard";
-import recipeStyles from "../components/Recipe/Recipe.module.css";
+/**
+ * RecipesPage.jsx
+ * Browse recipes page with interactive live search, multi-category checkbox filtering,
+ * difficulty toggle chips, and dynamic empty states.
+ */
+
+import { useState, useMemo, useEffect } from "react";
+import { RECIPES_DATA } from "../data/recipesData";
+import { useFavorites } from "../hooks/useFavorites";
+import { filterRecipes } from "../utils/helpers";
+import SearchBar from "../components/UI/SearchBar";
+import RecipeList from "../components/Recipe/RecipeList";
+import Button from "../components/UI/Button";
+import Header from "../components/common/Header";
 import styles from "./RecipesPage.module.css";
 
-const recipes = [
-  {
-    id: 1,
-    title: "Perfect Poached Egg Avocado Toast",
-    cookTime: "15m",
-    difficulty: "Easy",
-    tags: ["Breakfast", "Vegetarian"],
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBuEl_uKc8MS_Ljta2FKb2oJ77WbdHo5R_BmyoIqTPLgP8pSsKqoG2xGlVHLa1d8Hd0SFKADfEAvOvpTvCfJI5k7vsK9XCn-AVOrG4oak3YTne480rnBBhyJdeWsdQXRZVhwiuYSlVWg6ok7Wyu33625FHw0o_b73VyO7IzMjg9IIfg9auqjbJYDsh_u-g-gM3VGlyg9opj24JZ3XdL6S8cbxeO9z_bYBN9-UUnxm6lBdOPTtbU0soZ4g",
-  },
-  {
-    id: 2,
-    title: "Nourishing Sweet Potato Quinoa Bowl",
-    cookTime: "35m",
-    difficulty: "Medium",
-    tags: ["Lunch", "Vegan"],
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuD_X_qGDnofnZzJ9Tq6e5h2ufkL-W9__nR3PwoAvNfbGBw3SZKS3ddDFxmfNP7ewrFaJMiCf_OCYDnT-CMa3jfi4AE7Fhdlcgu8mXtNj_WIQ55ajPJsZPGte4vgR8hRML1hFktLJimWJtNXXhRmL_UfLbtlyRVtKcf0zc7VyWBQwRjMQQaaegoW6aMd6cLWHzZ1LtXJJjltDyW0kdU0_WmYeVMzEPWc6XNHjY1iwcS1Fr2LR85oJXOyMA",
-  },
-  {
-    id: 3,
-    title: "Pan-Seared Salmon with Lemon-Dill Quinoa",
-    cookTime: "40 min",
-    difficulty: "Medium",
-    tags: ["Dinner"],
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBxQhXN7M4CQahM_uiOWSwxLZouIOrJZRPtKu2PN5tLmbfU5VxXodeJYYYdg7BWp0TAmM8qsixaLRwF61UGUxm2WdJj0jvXLc9njSwbcw97PUEC-2pI-pkROIu3WpWrmeqo9Jeycm4MfHNSyaxRTKCtPR4FqU4hPKvGR02EtvBF9n8m-yMI0CxD6vgiPpvHSw1i-qIzvkx_GvOPUvHYPx_IhzJ9fd-iion4grWbVUClX_vHetTKQTDeXw",
-  },
-];
+const MEAL_TYPES = ["Breakfast", "Lunch", "Dinner"];
+const DIFFICULTIES = ["All", "Easy", "Medium", "Hard"];
 
 export default function RecipesPage() {
+  const { isFavorite, toggleFavorite } = useFavorites();
+
+  // Search and filter states
+  const [search, setSearch] = useState("");
+  const [selectedMealTypes, setSelectedMealTypes] = useState([]);
+  const [selectedDifficulty, setSelectedDifficulty] = useState("All");
+
+  // Sync document title on page load
+  useEffect(() => {
+    document.title = "Explore Recipes | Platr";
+    return () => {
+      document.title = "Platr: Smart Meal Planning & Recipes";
+    };
+  }, []);
+
+  // Toggle meal type checkbox selection
+  const handleMealTypeToggle = (type) => {
+    setSelectedMealTypes((prev) =>
+      prev.includes(type) ? prev.filter((t) => t !== type) : [...prev, type]
+    );
+  };
+
+  // Reset all active filters
+  const handleResetFilters = () => {
+    setSearch("");
+    setSelectedMealTypes([]);
+    setSelectedDifficulty("All");
+  };
+
+  // Filtered recipe list computed via helper
+  const filteredRecipes = useMemo(() => {
+    return filterRecipes(RECIPES_DATA, {
+      search,
+      mealTypes: selectedMealTypes,
+      difficulty: selectedDifficulty,
+    });
+  }, [search, selectedMealTypes, selectedDifficulty]);
+
+  const hasActiveFilters =
+    search.trim() !== "" ||
+    selectedMealTypes.length > 0 ||
+    selectedDifficulty !== "All";
+
   return (
     <main className="page">
       <div className="wrap">
-        <div className={styles.top}>
-          <input
-            className={styles.search}
-            type="search"
-            placeholder="Search for recipes, ingredients, or cuisines..."
+        <div style={{ paddingTop: 32 }}>
+          <Header
+            eyebrow="Explore & Cook"
+            title="All Recipes"
+            subtitle="Browse our collection of dependable, delicious, and easy-to-follow recipes."
           />
         </div>
+
+        {/* Top Search Bar */}
+        <div className={styles.top}>
+          <SearchBar
+            value={search}
+            onChange={setSearch}
+            onClear={() => setSearch("")}
+            placeholder="Search by recipe name, ingredient (e.g. avocado, salmon), or cuisine..."
+          />
+        </div>
+
+        {/* Filters and Recipe Grid Layout */}
         <div className={styles.layout}>
           <aside className={styles.filters}>
-            <h2>Filters</h2>
-            <p>Meal type</p>
-            <label>
-              <input type="checkbox" defaultChecked readOnly /> Breakfast
-            </label>
-            <label>
-              <input type="checkbox" readOnly /> Lunch
-            </label>
-            <label>
-              <input type="checkbox" readOnly /> Dinner
-            </label>
-            <p>Difficulty</p>
-            <div className={styles.chips}>
-              <span className={styles.chipOn}>Easy</span>
-              <span className={styles.chip}>Medium</span>
-              <span className={styles.chip}>Hard</span>
+            <div className={styles.filtersHead}>
+              <h2>Filters</h2>
+              {hasActiveFilters && (
+                <button
+                  type="button"
+                  className={styles.resetBtn}
+                  onClick={handleResetFilters}
+                >
+                  Reset All
+                </button>
+              )}
+            </div>
+
+            {/* Meal Type Checkboxes */}
+            <div className={styles.filterGroup}>
+              <span className={styles.filterGroupTitle}>Meal Type</span>
+              {MEAL_TYPES.map((type) => (
+                <label key={type} className={styles.filterLabel}>
+                  <input
+                    type="checkbox"
+                    checked={selectedMealTypes.includes(type)}
+                    onChange={() => handleMealTypeToggle(type)}
+                  />
+                  {type}
+                </label>
+              ))}
+            </div>
+
+            {/* Difficulty Chips */}
+            <div className={styles.filterGroup}>
+              <span className={styles.filterGroupTitle}>Difficulty</span>
+              <div className={styles.chips}>
+                {DIFFICULTIES.map((diff) => (
+                  <button
+                    key={diff}
+                    type="button"
+                    className={
+                      selectedDifficulty === diff ? styles.chipOn : styles.chip
+                    }
+                    onClick={() => setSelectedDifficulty(diff)}
+                  >
+                    {diff}
+                  </button>
+                ))}
+              </div>
             </div>
           </aside>
-          <div className={recipeStyles.grid}>
-            {recipes.map((recipe) => (
-              <RecipeCard key={recipe.id} recipe={recipe} />
-            ))}
+
+          {/* Recipes Content Area */}
+          <div className={styles.contentArea}>
+            <div className={styles.resultsMeta}>
+              <span>
+                Showing <strong>{filteredRecipes.length}</strong> of{" "}
+                {RECIPES_DATA.length} recipes
+              </span>
+            </div>
+
+            <RecipeList
+              recipes={filteredRecipes}
+              isFavorite={isFavorite}
+              onToggleFavorite={toggleFavorite}
+              emptyTitle="No matching recipes found"
+              emptyMessage="We couldn't find any recipes matching your current search or filter combination."
+              emptyAction={
+                hasActiveFilters ? (
+                  <Button variant="secondary" onClick={handleResetFilters}>
+                    Clear Filters
+                  </Button>
+                ) : null
+              }
+            />
           </div>
         </div>
       </div>

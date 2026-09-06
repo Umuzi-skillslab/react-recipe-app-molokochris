@@ -1,40 +1,52 @@
-import RecipeCard from "../components/Recipe/RecipeCard";
-import recipeStyles from "../components/Recipe/Recipe.module.css";
+/**
+ * FavoritesPage.jsx
+ * Displays the user's bookmarked favorite recipes with localStorage persistence
+ * and empty state handling.
+ */
 
-const favorites = [
-  {
-    id: 1,
-    title: "Mediterranean Chickpea Salad Bowl",
-    cookTime: "15 mins",
-    difficulty: "Easy",
-    tags: ["Vegetarian"],
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuD57nWP4pWOociz4BFMSNXt7KC2Ww1pyvlJzLrsJS9lfv_Jspi3G4uJLvMTW0hGbK8sVmki27lk2FjdDq0KDKR4JLbaD_cJ0jb8BUpvVkrmeH9Qy3AdNlEL4zRxdqWNGLqhm69rmknxHU4k1xx8JTycQSB3Q8dWLffUoYyRgvqJnypSnGM6uN5DhizLv60NiqnSSJpBBbZOU_GyQmlRVH87NUmJu-d0AC1T1YoLgKFVROpRxI94w93u0w",
-  },
-  {
-    id: 3,
-    title: "Pan-Seared Salmon with Lemon Asparagus Quinoa",
-    cookTime: "25 mins",
-    difficulty: "Medium",
-    tags: ["High protein"],
-    image:
-      "https://lh3.googleusercontent.com/aida-public/AB6AXuBqoVikZDqmt1T8W_6HZnGwrU5ZNm3XjG5t_vpLlB4Z-WNYQ_Awc8msjKXGFT2yFCrUEZS215XrpO9M2cRBMvri0B8caCVFvxpN7Bx3E_JF-UiaXM1it4q2GLNDLRlewgl_2KBcaylUuIyuJPwil6gYy_iJFSFUSWYHs-SFmqc-PG1_owx1qRoFwH5tOToj6Aq-B-IctqKAy289hFCI3CGt7Gbwn6BjJ5GQl6WeUJ3De3kYotGRkzOmlg",
-  },
-];
+import { useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useFavorites } from "../hooks/useFavorites";
+import RecipeList from "../components/Recipe/RecipeList";
+import Header from "../components/common/Header";
+import Button from "../components/UI/Button";
 
 export default function FavoritesPage() {
+  const { favoriteRecipes, isFavorite, toggleFavorite, favoritesCount } = useFavorites();
+
+  // Update document title
+  useEffect(() => {
+    document.title = "Your Favorites | Platr";
+    return () => {
+      document.title = "Platr: Smart Meal Planning & Recipes";
+    };
+  }, []);
+
   return (
     <main className="page">
       <div className="wrap" style={{ paddingTop: 32, paddingBottom: 48 }}>
-        <h1 style={{ fontSize: 40, marginBottom: 8 }}>Your Favorites</h1>
-        <p style={{ color: "var(--muted)", marginBottom: 32 }}>
-          The recipes you love, all in one place.
-        </p>
-        <div className={recipeStyles.grid}>
-          {favorites.map((recipe) => (
-            <RecipeCard key={recipe.id} recipe={recipe} favorite />
-          ))}
-        </div>
+        <Header
+          eyebrow="Saved Collection"
+          title="Your Favorite Recipes"
+          subtitle={
+            favoritesCount > 0
+              ? `You have saved ${favoritesCount} recipe${favoritesCount === 1 ? "" : "s"} to your cookbook.`
+              : "Save your favorite meals to easily find them when planning your week."
+          }
+        />
+
+        <RecipeList
+          recipes={favoriteRecipes}
+          isFavorite={isFavorite}
+          onToggleFavorite={toggleFavorite}
+          emptyTitle="No favorites saved yet"
+          emptyMessage="Browse our recipes and tap the heart icon on any recipe to save it here for quick access!"
+          emptyAction={
+            <Link to="/recipes">
+              <Button variant="primary">Explore Recipes</Button>
+            </Link>
+          }
+        />
       </div>
     </main>
   );

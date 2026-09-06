@@ -1,72 +1,95 @@
-import { ChevronLeft, ChevronRight, Plus } from "lucide-react";
-import styles from "./MealPlannerPage.module.css";
+/**
+ * MealPlannerPage.jsx
+ * Interactive Weekly Meal Planning view connecting custom hooks, week navigation,
+ * and calendar grid management.
+ */
 
-const days = [
-  { name: "Mon", num: 28, meals: { lunch: "Quinoa Salad", dinner: "Tuscan Chicken" } },
-  { name: "Tue", num: 29, meals: { breakfast: "Berry Oatmeal" } },
-  { name: "Wed", num: 30, meals: {} },
-  { name: "Thu", num: 31, meals: {} },
-  { name: "Fri", num: 1, meals: {} },
-  { name: "Sat", num: 2, meals: {} },
-  { name: "Sun", num: 3, meals: {} },
-];
-
-const slots = ["breakfast", "lunch", "dinner"];
-
-function Slot({ label, value }) {
-  return (
-    <div>
-      <div className={styles.slotLabel}>{label}</div>
-      {value ? (
-        <div className={styles.filled}>
-          <img
-            alt={value}
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtatl7QNSFSZaSullIPFTM-7L2IcOIBa5OXh-3M28VAswsaf76_VzXwvDhnf8ocmxcQDrbureSQBUPrZoqVdzpmT2N9dwVNAW38nWwe4zYY4-otu0LiUwk2EoW8nigRuNWCFvZz-r9quDgKhQLk5UMAvgz-w-ries-mQKB5myA5mj4upAoAeBRC7SjWTZ06WvEsYFjFDN1_1IFwKXVAPbTJ-wCdsggnYDkY0o5EBovfHzCwkONQbgJhg"
-          />
-          <span>{value}</span>
-        </div>
-      ) : (
-        <div className={styles.empty}>
-          <Plus size={16} />
-          Add recipe
-        </div>
-      )}
-    </div>
-  );
-}
+import { useState, useEffect } from "react";
+import { ChevronLeft, ChevronRight, Trash2, Check } from "lucide-react";
+import { useMealPlan } from "../hooks/useMealPlan";
+import MealPlanner from "../components/MealPlanner/MealPlanner";
+import Header from "../components/common/Header";
+import Button from "../components/UI/Button";
 
 export default function MealPlannerPage() {
+  const {
+    plan,
+    addMeal,
+    removeMeal,
+    clearWeek,
+    prevWeek,
+    nextWeek,
+    weekLabel,
+    getRecipeById,
+  } = useMealPlan();
+
+  const [confirmClear, setConfirmClear] = useState(false);
+
+  // Sync document title
+  useEffect(() => {
+    document.title = "Weekly Meal Planner | Platr";
+    return () => {
+      document.title = "Platr: Smart Meal Planning & Recipes";
+    };
+  }, []);
+
+  const handleClear = () => {
+    if (confirmClear) {
+      clearWeek();
+      setConfirmClear(false);
+    } else {
+      setConfirmClear(true);
+      setTimeout(() => setConfirmClear(false), 4000);
+    }
+  };
+
   return (
     <main className="page">
-      <div className="wrap">
-        <div className={styles.head}>
-          <div>
-            <h1>This Week's Plan</h1>
-            <p>Oct 28 - Nov 3</p>
-          </div>
-          <div className={styles.tools}>
-            <button type="button">
+      <div className="wrap" style={{ paddingTop: 32, paddingBottom: 48 }}>
+        <Header
+          eyebrow="Meal Organizer"
+          title="Weekly Schedule"
+          subtitle={weekLabel}
+        >
+          <div style={{ display: "flex", gap: 8, alignItems: "center", flexWrap: "wrap" }}>
+            <Button
+              variant="secondary"
+              onClick={prevWeek}
+              ariaLabel="Previous week"
+            >
               <ChevronLeft size={16} /> Prev
-            </button>
-            <button type="button">
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={nextWeek}
+              ariaLabel="Next week"
+            >
               Next <ChevronRight size={16} />
-            </button>
-            <button type="button" className={styles.danger}>
-              Clear week
-            </button>
+            </Button>
+            <Button
+              variant={confirmClear ? "danger" : "secondary"}
+              onClick={handleClear}
+              ariaLabel="Clear week meals"
+            >
+              {confirmClear ? (
+                <>
+                  <Check size={16} /> Confirm Clear?
+                </>
+              ) : (
+                <>
+                  <Trash2 size={16} /> Clear Week
+                </>
+              )}
+            </Button>
           </div>
-        </div>
-        <div className={styles.week}>
-          {days.map((day) => (
-            <article key={day.name} className={styles.day}>
-              <div className={styles.dayName}>{day.name}</div>
-              <div className={styles.dayNum}>{day.num}</div>
-              {slots.map((slot) => (
-                <Slot key={slot} label={slot} value={day.meals[slot]} />
-              ))}
-            </article>
-          ))}
-        </div>
+        </Header>
+
+        <MealPlanner
+          plan={plan}
+          getRecipeById={getRecipeById}
+          onAddMeal={addMeal}
+          onRemoveMeal={removeMeal}
+        />
       </div>
     </main>
   );
