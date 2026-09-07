@@ -7,22 +7,22 @@ A modern, responsive React web application for recipe discovery, nutritional pla
 ## Application Screenshots
 
 ### 1. Home and Trending Picks
-![Home Page](./screenshots/home.png)
+![Home Page](./recipe-app/screenshots/home.png)
 
 ### 2. Search and Multi-Faceted Filters
-![Recipes Search & Filters](./screenshots/recipes-filters.png)
+![Recipes Search & Filters](./recipe-app/screenshots/recipes-filters.png)
 
 ### 3. Dynamic Recipe Detail and Video Player
-![Recipe Detail with Video](./screenshots/recipe-detail-video.png)
+![Recipe Detail with Video](./recipe-app/screenshots/recipe-detail-video.png)
 
 ### 4. Weekly Meal Planner
-![Weekly Meal Planner](./screenshots/meal-planner.png)
+![Weekly Meal Planner](./recipe-app/screenshots/meal-planner.png)
 
 ### 5. Bookmarked Favorites
-![Saved Favorites](./screenshots/favorites.png)
+![Saved Favorites](./recipe-app/screenshots/favorites.png)
 
 ### 6. Responsive Mobile View
-![Mobile View](./screenshots/mobile-view.png)
+![Mobile View](./recipe-app/screenshots/mobile-view.png)
 
 ---
 
@@ -62,7 +62,7 @@ A modern, responsive React web application for recipe discovery, nutritional pla
 ## Component Architecture
 
 ```
-src/
+recipe-app/src/
 ├── components/
 │   ├── common/ (Footer.jsx, Header.jsx, Logo.jsx)
 │   ├── MealPlanner/ (DayCard.jsx, MealPlanner.jsx)
@@ -96,13 +96,16 @@ src/
 ## Getting Started
 
 ```bash
-# 1. Install dependencies
+# 1. Navigate into the app directory
+cd recipe-app
+
+# 2. Install dependencies
 npm install
 
-# 2. Run local development server
+# 3. Run local development server
 npm run dev
 
-# 3. Validate lint and production build
+# 4. Validate lint and production build
 npm run lint
 npm run build
 ```
