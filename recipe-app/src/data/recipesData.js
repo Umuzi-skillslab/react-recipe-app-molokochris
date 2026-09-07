@@ -17,7 +17,7 @@ export const RECIPES_DATA = [
     mealType: "Dinner",
     tags: ["Vegetarian", "Dinner", "Japanese", "Comfort Food"],
     featured: true,
-    image: "https://picsum.photos/seed/platr-r1/600/400",
+    image: "https://images.unsplash.com/photo-1569050467447-ce54b3bbc37d?auto=format&fit=crop&w=600&q=80",
     videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
     audioTip: {
       title: "Mastering Jammy Eggs",
@@ -56,7 +56,7 @@ export const RECIPES_DATA = [
     mealType: "Breakfast",
     tags: ["Gluten Free", "Breakfast", "Vegetarian", "Mediterranean"],
     featured: true,
-    image: "https://picsum.photos/seed/platr-r2/600/400",
+    image: "https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?auto=format&fit=crop&w=600&q=80",
     videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
     audioTip: {
       title: "Gentle Egg Poaching",
@@ -94,7 +94,7 @@ export const RECIPES_DATA = [
     mealType: "Dinner",
     tags: ["Pescatarian", "Dinner", "High Protein", "Gluten Free"],
     featured: true,
-    image: "https://picsum.photos/seed/platr-r3/600/400",
+    image: "https://images.unsplash.com/photo-1727056353458-d985e6aa06b4?auto=format&fit=crop&w=600&q=80",
     videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
     audioTip: {
       title: "The Perfect Salmon Sear",
@@ -131,7 +131,7 @@ export const RECIPES_DATA = [
     mealType: "Breakfast",
     tags: ["Breakfast", "Vegetarian", "Quick & Easy", "Healthy"],
     featured: false,
-    image: "https://picsum.photos/seed/platr-r4/600/400",
+    image: "https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?auto=format&fit=crop&w=600&q=80",
     videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
     audioTip: {
       title: "Foolproof Egg Poaching",
@@ -166,7 +166,7 @@ export const RECIPES_DATA = [
     mealType: "Lunch",
     tags: ["Lunch", "Vegan", "Gluten Free", "Meal Prep"],
     featured: false,
-    image: "https://picsum.photos/seed/platr-r5/600/400",
+    image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80",
     videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
     audioTip: {
       title: "Tahini Dressing Balance",
@@ -203,7 +203,7 @@ export const RECIPES_DATA = [
     mealType: "Lunch",
     tags: ["Lunch", "Vegetarian", "Mediterranean", "Quick & Easy"],
     featured: false,
-    image: "https://picsum.photos/seed/platr-r6/600/400",
+    image: "https://images.unsplash.com/photo-1568897798550-91c8caffe391?auto=format&fit=crop&w=600&q=80",
     videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyBlazes.mp4",
     audioTip: {
       title: "Marinating Chickpeas",
@@ -239,7 +239,7 @@ export const RECIPES_DATA = [
     mealType: "Dinner",
     tags: ["Dinner", "High Protein", "Italian", "Comfort Food"],
     featured: false,
-    image: "https://picsum.photos/seed/platr-r7/600/400",
+    image: "https://images.unsplash.com/photo-1555949258-eb67b1ef0ceb?auto=format&fit=crop&w=600&q=80",
     videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerMeltdowns.mp4",
     audioTip: {
       title: "Pan Searing Chicken Breasts",
@@ -275,7 +275,7 @@ export const RECIPES_DATA = [
     mealType: "Breakfast",
     tags: ["Breakfast", "Vegan", "Heart Healthy", "Gluten Free"],
     featured: false,
-    image: "https://picsum.photos/seed/platr-r8/600/400",
+    image: "https://images.unsplash.com/photo-1517673132405-a56a62b18caf?auto=format&fit=crop&w=600&q=80",
     videoUrl: "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
     audioTip: {
       title: "Toasting Oats for Maximum Flavor",

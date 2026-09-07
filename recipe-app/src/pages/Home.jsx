@@ -58,7 +58,7 @@ export default function Home() {
           <div className={styles.heroImage}>
             <img
               alt="Fresh Mediterranean salad"
-              src="https://picsum.photos/seed/platr-hero/1200/800"
+              src="https://images.unsplash.com/photo-1568897798550-91c8caffe391?auto=format&fit=crop&w=1200&q=80"
             />
           </div>
         </section>
@@ -85,7 +85,7 @@ export default function Home() {
         <section className={`${styles.section} ${styles.audio}`}>
           <img
             alt="Hands kneading dough"
-            src="https://picsum.photos/seed/platr-audio/800/500"
+            src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=800&q=80"
           />
           <div>
             <span className={styles.eyebrow}>Daily audio tip</span>
