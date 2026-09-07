@@ -78,7 +78,7 @@ src/
 
 ---
 
-## Getting Started
+## How to View
 
 ```bash
 # 1. Install dependencies
