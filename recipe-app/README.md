@@ -8,27 +8,27 @@ A modern, responsive React web application for recipe discovery, nutritional pla
 
 ### 1. Home and Trending Picks
 
-![Home Page](./screenshots/home.png)
+![Home Page](./recipe-app/screenshots/recipe-app-chi-jade.vercel.app.png)
 
 ### 2. Search and Multi-Faceted Filters
 
-![Recipes Search & Filters](./screenshots/recipes-filters.png)
+![Recipes Search](./recipe-app/screenshots/recipe-app-chi-jade.vercel.app-recipes.png)
 
 ### 3. Dynamic Recipe Detail and Video Player
 
-![Recipe Detail with Video](./screenshots/recipe-detail-video.png)
+![Recipe Detail](./recipe-app/screenshots/recipe-app-chi-jade.vercel.app-recipes-2.png)
 
 ### 4. Weekly Meal Planner
 
-![Weekly Meal Planner](./screenshots/meal-planner.png)
+![Weekly Meal Planner](./recipe-app/screenshots/recipe-app-chi-jade.vercel.app-meal-planner.png)
 
 ### 5. Bookmarked Favorites
 
-![Saved Favorites](./screenshots/favorites.png)
+![Saved Favorites](./recipe-app/screenshots/recipe-app-chi-jade.vercel.app-favorites.png)
 
 ### 6. Responsive Mobile View
 
-![Mobile View](./screenshots/mobile-view.png)
+![Mobile View](./recipe-app/screenshots/recipe-app-chi-jade.vercel.app.mobile.png)
 
 ---
 
