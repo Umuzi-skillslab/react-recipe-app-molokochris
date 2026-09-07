@@ -77,20 +77,6 @@ recipe-app/src/
 ```
 
 ---
-
-## Rubric Compliance Highlights
-
-- **Component Architecture (L4)**: 14 modular components; 0 empty stubs.
-- **Props Implementation (L4)**: Strict `PropTypes` shape and function validation across all components.
-- **Styling & Design (L4)**: CSS Modules + CSS Custom Properties, responsive design, dark/light accents.
-- **JSX Syntax & Expressions (L4)**: Semantic HTML5, expressive `.map()` lists, clean ternary logic.
-- **Event Handling (L4)**: 12+ handler types (`onChange`, `onClick`, `onBlur`, `onPlay`, `onPause`, `onTimeUpdate`, `onLoadedMetadata`, `onEnded`) with event bubbling prevention (`e.stopPropagation()`).
-- **State Management & Hooks (L4)**: 22+ state variables across 9 files + 7 `useEffect` hooks with `localStorage` persistence and cleanup.
-- **Data Flow (L4)**: Unidirectional flow with callback props (`onToggleFavorite`, `onAddMeal`, `onRemoveMeal`).
-- **Conditional Rendering (L4)**: Empty states, dynamic badges, modal rendering, play/pause overlays.
-- **Media & Routing (L4)**: Functional HTML5 `<audio>` & `<video>`, parameterized routing (`/recipes/:id`), and 404 page.
-- **Code Quality & Documentation (L4)**: JSDoc comments on all functions, 0 lint warnings, 0 build errors.
-
 ---
 
 ## Getting Started
