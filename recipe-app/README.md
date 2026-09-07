@@ -7,21 +7,27 @@ A modern, responsive React web application for recipe discovery, nutritional pla
 ## Application Screenshots
 
 ### 1. Home and Trending Picks
+
 ![Home Page](./screenshots/home.png)
 
 ### 2. Search and Multi-Faceted Filters
+
 ![Recipes Search & Filters](./screenshots/recipes-filters.png)
 
 ### 3. Dynamic Recipe Detail and Video Player
+
 ![Recipe Detail with Video](./screenshots/recipe-detail-video.png)
 
 ### 4. Weekly Meal Planner
+
 ![Weekly Meal Planner](./screenshots/meal-planner.png)
 
 ### 5. Bookmarked Favorites
+
 ![Saved Favorites](./screenshots/favorites.png)
 
 ### 6. Responsive Mobile View
+
 ![Mobile View](./screenshots/mobile-view.png)
 
 ---
