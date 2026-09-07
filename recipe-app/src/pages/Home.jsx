@@ -58,7 +58,7 @@ export default function Home() {
           <div className={styles.heroImage}>
             <img
               alt="Fresh Mediterranean salad"
-              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDvt-qJeXzWUntDT6vfx9QTLI-b85wF4iIh6CoZh3BNKO7i49yg_y1za5t6w8hbUNxETQWdWGJqDz_YNXcg_zWmYuGJxv7Y6dtrhKiP0iGPT33z60dTIBQvDxR8x5jEV_Bd2Z_XNUMQhL0bFpmyfZR9DUtBiwe8U7NChYsQ-Mpa-3GIQe1i9jJ_J3llZvlNCq6I_bIEsxawBcSTuXXKTdAEQxajrPYe_jxaAz-nhygso6Xy6_OToG7Yg"
+              src="https://picsum.photos/seed/platr-hero/1200/800"
             />
           </div>
         </section>
@@ -85,7 +85,7 @@ export default function Home() {
         <section className={`${styles.section} ${styles.audio}`}>
           <img
             alt="Hands kneading dough"
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFEwfMKTv-gdq7gbq8GeBKYPscAa5Z-aXNobzlspi5WIzX-Qjxw2BWCFGlPQ4IYnkZwfEBNh6rsFBZH3a4EnWZwhq0uMJpu5mDrIsCoRL4soCZeOwEoRsqUNdmus6z6QqP5LMElWj8gp45QoTfDEq8L2MKKBWZhI6HjHQmdIZs7BttEoXGfTQ0BBJLG3fc9qjJGFRmNmKKKqWnRLr9M5t0GJNPXQws9mgSy18pwbqZLumq0iOFYJmJ0Q"
+            src="https://picsum.photos/seed/platr-audio/800/500"
           />
           <div>
             <span className={styles.eyebrow}>Daily audio tip</span>
