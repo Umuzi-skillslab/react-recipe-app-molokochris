@@ -1,0 +1,158 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.weekGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 16px;
+}
+
+/* DayCard Styles */
+.dayCard {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.dayHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--bg-soft);
+  padding-bottom: 8px;
+}
+
+.dayName {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text);
+}
+
+.dayNum {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.slotsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.slotItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.slotLabel {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.filledSlot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-soft);
+  border-radius: 8px;
+  padding: 6px 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.slotThumbnail {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.slotRecipeTitle {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+.removeSlotBtn {
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.removeSlotBtn:hover {
+  color: var(--danger);
+  background: #fee2e2;
+}
+
+.emptySlotBtn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px dashed var(--line);
+  background: transparent;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.emptySlotBtn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: rgba(39, 107, 53, 0.04);
+}
+
+/* Quick Select Dropdown inside Empty Slot */
+.inlineSelect {
+  width: 100%;
+  font-size: 12px;
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid var(--primary);
+  background: #ffffff;
+  color: var(--text);
+  outline: none;
+}
+
+@media (max-width: 1100px) {
+  .weekGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .weekGrid {
+    grid-template-columns: 1fr;
+  }
+}
