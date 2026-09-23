@@ -14,6 +14,7 @@ import { useMealPlan } from "../../hooks/useMealPlan";
 import VideoPlayer from "../Media/VideoPlayer";
 import AudioPlayer from "../Media/AudioPlayer";
 import Button from "../UI/Button";
+import Modal from "../UI/Modal";
 import styles from "./Recipe.module.css";
 
 const DAYS_OF_WEEK = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
@@ -50,9 +51,9 @@ export default function RecipeDetail() {
   if (!recipe) {
     return (
       <main className="page">
-        <div className="wrap" style={{ paddingTop: 64, textAlign: "center" }}>
+        <div className={`wrap ${styles.notFound}`}>
           <h2>Recipe Not Found</h2>
-          <p style={{ color: "var(--muted)", margin: "16px 0 24px" }}>
+          <p className={styles.notFoundText}>
             The recipe you are looking for does not exist or has been removed.
           </p>
           <Link to="/recipes">
@@ -112,13 +113,13 @@ export default function RecipeDetail() {
           ))}
         </div>
 
-        <h1 className={styles.title} style={{ fontSize: 32, marginTop: 8 }}>
+        <h1 className={styles.detailTitle}>
           {recipe.title}
         </h1>
 
         <p className={styles.description}>{recipe.description}</p>
 
-        <div className={styles.meta} style={{ marginTop: 16 }}>
+        <div className={`${styles.meta} ${styles.detailMeta}`}>
           <span>
             <Clock size={16} /> Cook: {recipe.cookTime} (Prep: {recipe.prepTime})
           </span>
@@ -148,20 +149,7 @@ export default function RecipeDetail() {
         </div>
 
         {toastMessage && (
-          <div
-            style={{
-              marginTop: 16,
-              padding: "10px 16px",
-              background: "var(--leaf)",
-              color: "var(--leaf-dark)",
-              borderRadius: 8,
-              fontSize: 14,
-              fontWeight: 600,
-              display: "inline-flex",
-              alignItems: "center",
-              gap: 8,
-            }}
-          >
+          <div className={styles.toast}>
             <Check size={16} /> {toastMessage}
           </div>
         )}
@@ -171,9 +159,7 @@ export default function RecipeDetail() {
       <section className={styles.mediaSection}>
         {recipe.videoUrl && (
           <div>
-            <h2 style={{ fontSize: 22, fontWeight: 700, marginBottom: 12 }}>
-              Video Tutorial
-            </h2>
+            <h2 className={styles.mediaHeading}>Video Tutorial</h2>
             <VideoPlayer
               src={recipe.videoUrl}
               poster={recipe.image}
@@ -184,9 +170,7 @@ export default function RecipeDetail() {
 
         {recipe.audioTip && (
           <div>
-            <h2 style={{ fontSize: 22, fontWeight: 700, marginBottom: 12 }}>
-              Chef's Kitchen Secret
-            </h2>
+            <h2 className={styles.mediaHeading}>Chef's Kitchen Secret</h2>
             <AudioPlayer
               src={recipe.audioTip.url}
               title={recipe.audioTip.title}
@@ -228,18 +212,8 @@ export default function RecipeDetail() {
 
       {/* Interactive Add to Meal Planner Modal */}
       {isModalOpen && (
-        <div
-          className={styles.modalBackdrop}
-          onClick={() => setIsModalOpen(false)}
-        >
-          <div
-            className={styles.modal}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className={styles.modalHead}>
-              <h3>Add to Meal Planner</h3>
-            </div>
-            <p style={{ fontSize: 14, color: "var(--muted)" }}>
+        <Modal title="Add to Meal Planner" onClose={() => setIsModalOpen(false)}>
+            <p className={styles.modalHint}>
               Schedule <strong>{recipe.title}</strong> into your weekly plan:
             </p>
 
@@ -289,8 +263,7 @@ export default function RecipeDetail() {
                 Confirm Add
               </Button>
             </div>
-          </div>
-        </div>
+        </Modal>
       )}
     </main>
   );
