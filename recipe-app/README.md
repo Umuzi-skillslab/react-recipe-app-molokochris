@@ -8,27 +8,27 @@ A modern, responsive React web application for recipe discovery, nutritional pla
 
 ### 1. Home and Trending Picks
 
-![Home Page](./recipe-app/screenshots/recipe-app-chi-jade.vercel.app.png)
+![Home Page](./screenshots/recipe-app-chi-jade.vercel.app.png)
 
 ### 2. Search and Multi-Faceted Filters
 
-![Recipes Search & Filters](./recipe-app/screenshots/recipe-app-chi-jade.vercel.app-recipes.png)
+![Recipes Search](./screenshots/recipe-app-chi-jade.vercel.app-recipes.png)
 
 ### 3. Dynamic Recipe Detail and Video Player
 
-![Recipe Detail with Video](./recipe-app/screenshots/recipe-app-chi-jade.vercel.app-recipes-2.png)
+![Recipe Detail](./screenshots/recipe-app-chi-jade.vercel.app-recipes-2.png)
 
 ### 4. Weekly Meal Planner
 
-![Weekly Meal Planner](./recipe-app/screenshots/recipe-app-chi-jade.vercel.app-meal-planner.png)
+![Weekly Meal Planner](./screenshots/recipe-app-chi-jade.vercel.app-meal-planner.png)
 
 ### 5. Bookmarked Favorites
 
-![Saved Favorites](./recipe-app/screenshots/recipe-app-chi-jade.vercel.app-favorites.png)
+![Saved Favorites](./screenshots/recipe-app-chi-jade.vercel.app-favorites.png)
 
 ### 6. Responsive Mobile View
 
-![Mobile View](./recipe-app/screenshots/recipe-app-chi-jade.vercel.app.mobile.png)
+![Mobile View](./screenshots/recipe-app-chi-jade.vercel.app.mobile.png)
 
 ---
 
@@ -68,7 +68,7 @@ A modern, responsive React web application for recipe discovery, nutritional pla
 ## Component Architecture
 
 ```
-recipe-app/src/
+src/
 ├── components/
 │   ├── common/ (Footer.jsx, Header.jsx, Logo.jsx)
 │   ├── MealPlanner/ (DayCard.jsx, MealPlanner.jsx)
@@ -100,16 +100,13 @@ recipe-app/src/
 ## How to View
 
 ```bash
-# 1. Navigate into the app directory
-cd recipe-app
-
-# 2. Install dependencies
+# 1. Install dependencies
 npm install
 
-# 3. Run local development server
+# 2. Run local development server
 npm start
 
-# 4. Validate lint and production build
+# 3. Validate lint and production build
 npm run lint
 npm run build
 ```

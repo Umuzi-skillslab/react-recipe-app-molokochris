@@ -1,0 +1,46 @@
+/**
+ * Footer.jsx
+ * Global site footer with branding, support links, social icons, and copyright.
+ */
+
+import { Mail, Globe, Share2 } from "lucide-react";
+import { Link } from "react-router-dom";
+import styles from "./common.module.css";
+
+export default function Footer() {
+  return (
+    <footer className={styles.footer}>
+      <div className="wrap">
+        <div className={styles.footerGrid}>
+          <div>
+            <Link to="/" className={styles.footerBrand} aria-label="Platr home">
+              <img src="/assets/images/platr-logo.png" alt="Platr" />
+            </Link>
+            <p>Elevating your daily meal planning with simplicity and style.</p>
+          </div>
+          <div className={styles.footerLinks}>
+            <span className={styles.footerTitle}>Support</span>
+            <a href="#help">Help Center</a>
+            <a href="#privacy">Privacy Policy</a>
+            <a href="#terms">Terms of Service</a>
+          </div>
+          <div>
+            <span className={styles.footerTitle}>Social</span>
+            <div className={styles.socials}>
+              <a href="#share" aria-label="Share Platr">
+                <Share2 size={20} />
+              </a>
+              <a href="#web" aria-label="Platr Website">
+                <Globe size={20} />
+              </a>
+              <a href="#mail" aria-label="Contact support via email">
+                <Mail size={20} />
+              </a>
+            </div>
+          </div>
+        </div>
+        <div className={styles.copy}>© 2024 Platr Inc. Freshly Prepared.</div>
+      </div>
+    </footer>
+  );
+}
